@@ -4,45 +4,39 @@ import {
   Param,
   Post,
   Body,
-  Query,
   Put,
   Delete,
+  ParseIntPipe,
 } from '@nestjs/common';
+import { CreateCustomerDto, UpdateCustomerDto } from 'src/dtos/customers.dto';
+import { CustomersService } from 'src/services/customers.service';
 
 @Controller('customer')
 export class CustomerController {
+  constructor(private customersService: CustomersService){}
+
   @Get()
-  getCustomers(@Query('limit') limit = 100, @Query('offset') offset = 0) {
-    return {
-      message: `customers: limit=> ${limit} offset=> ${offset}`,
-    };
+  getCustomers() {
+    return this.customersService.findAll();
   }
 
   @Get(':customerId')
-  getOne(@Param('customerId') customerId: string) {
-    return {
-      message: `customer ${customerId}`,
-    };
+  getOne(@Param('customerId', ParseIntPipe) customerId: number) {
+    return this.customersService.findOne(customerId);
   }
 
   @Post()
-  create(@Body() data: any) {
-    return {
-      message: '¡Customer creado!',
-      data,
-    };
+  create(@Body() data: CreateCustomerDto) {
+    return this.customersService.create(data)
   }
 
   @Put(':id')
-  update(@Param('id') id: number, @Body() customerInfo: any) {
-    return {
-      id: id,
-      customerInfo,
-    };
+  update(@Param('id', ParseIntPipe) id: number, @Body() customerInfo: UpdateCustomerDto) {
+    return this.customersService.update(id, customerInfo);
   }
 
   @Delete(':id')
-  delete(@Param('id') id: number) {
-    return id;
+  delete(@Param('id', ParseIntPipe) id: number) {
+    return this.customersService.remove(id);
   }
 }
