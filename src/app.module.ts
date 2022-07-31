@@ -1,20 +1,27 @@
-import { Module } from '@nestjs/common';
+import { Module, HttpModule, HttpService } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ProductsController } from './controllers/products.controller';
-import { CategoriesController } from './controllers/categories.controller';
-import { CustomerController } from './controllers/customer.controller';
-import { BrandController } from './controllers/brand.controller';
-import { ProductsService } from './services/products.service';
-import { CategoriesService } from './services/categories.service';
-import { BrandsService } from './services/brands.service';
-import { CustomersService } from './services/customers.service';
-import { UsersService } from './services/users.service';
-import { UsersController } from './controllers/users.controller';
+import { UsersModule } from './users/users.module';
+import { ProductsModule } from './products/products.module';
+import { DatabaseModule } from './database/database.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, ProductsController, CategoriesController,  CustomerController, BrandController, UsersController],
-  providers: [AppService, ProductsService, CategoriesService, BrandsService, CustomersService, UsersService],
+  imports: [UsersModule, ProductsModule, HttpModule, DatabaseModule],
+  controllers: [AppController],
+  providers: [
+    // useClass
+    AppService,
+    // useFactory
+    {
+      provide: 'TASKS',
+      useFactory: async (http: HttpService) => {
+        const tasks = await http
+          .get('https://jsonplaceholder.typicode.com/todos')
+          .toPromise();
+        return tasks.data;
+      },
+      inject: [HttpService],
+    },
+  ],
 })
 export class AppModule {}
