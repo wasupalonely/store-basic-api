@@ -6,7 +6,7 @@ import {
   IsPositive,
 } from 'class-validator';
 
-import { PartialType, OmitType } from '@nestjs/mapped-types';
+import { PartialType, OmitType } from '@nestjs/swagger';
 
 export class CreateProductDto {
   @IsString()

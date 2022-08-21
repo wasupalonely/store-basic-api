@@ -1,4 +1,4 @@
-import { PartialType, OmitType } from "@nestjs/mapped-types";
+import { PartialType, OmitType } from "@nestjs/swagger";
 import { IsEmail, IsNotEmpty, IsString, IsUrl } from "class-validator";
 
 export class CreateBrandDto {
