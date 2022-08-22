@@ -15,7 +15,7 @@ import { CustomersService } from './../services/customers.service';
 @ApiTags('customers')
 @Controller('customer')
 export class CustomerController {
-  constructor(private customersService: CustomersService){}
+  constructor(private customersService: CustomersService) {}
 
   @Get()
   getCustomers() {
@@ -29,11 +29,14 @@ export class CustomerController {
 
   @Post()
   create(@Body() data: CreateCustomerDto) {
-    return this.customersService.create(data)
+    return this.customersService.create(data);
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() customerInfo: UpdateCustomerDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() customerInfo: UpdateCustomerDto,
+  ) {
     return this.customersService.update(id, customerInfo);
   }
 

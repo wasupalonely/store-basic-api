@@ -17,9 +17,7 @@ import { CreateProductDto, UpdateProductDto } from './../dtos/products.dtos';
 @ApiTags('products')
 @Controller('products')
 export class ProductsController {
-  constructor(private productsService: ProductsService){
-
-  }
+  constructor(private productsService: ProductsService) {}
 
   @Get('filter')
   getProductFilter() {

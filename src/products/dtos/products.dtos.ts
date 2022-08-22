@@ -32,4 +32,6 @@ export class CreateProductDto {
   readonly image: string;
 }
 
-export class UpdateProductDto extends PartialType(OmitType(CreateProductDto, ['name']),) {}
+export class UpdateProductDto extends PartialType(
+  OmitType(CreateProductDto, ['name']),
+) {}

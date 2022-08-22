@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException, Inject } from '@nestjs/common';
 import { CreateUserDto, UpdateUserDto } from './../dtos/users.dto';
-import { ConfigService } from '@nestjs/config'
+import { ConfigService } from '@nestjs/config';
 import { User } from './../entities/user.entity';
 import { Order } from './../entities/order.entity';
 import { ProductsService } from './../../products/services/products.service';

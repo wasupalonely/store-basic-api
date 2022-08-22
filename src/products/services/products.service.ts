@@ -39,7 +39,7 @@ export class ProductsService {
 
   findOne(id: number) {
     const product = this.products.find((item) => item.id === id);
-    if(!product){
+    if (!product) {
       throw new NotFoundException(`Product #${id} not found`);
     }
     return product;
@@ -61,7 +61,7 @@ export class ProductsService {
       const index = this.products.findIndex((item) => item.id === id);
       this.products[index] = {
         ...product,
-        ...payload
+        ...payload,
       };
       return this.products[index];
     }
@@ -73,7 +73,7 @@ export class ProductsService {
     this.products.splice(this.products.indexOf(foundProduct), 1);
 
     return {
-      message: `Producto ${foundProduct.id} eliminado!`
+      message: `Producto ${foundProduct.id} eliminado!`,
     };
   }
 }

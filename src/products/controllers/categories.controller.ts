@@ -10,13 +10,16 @@ import {
 } from '@nestjs/common';
 
 import { CategoriesService } from './../services/categories.service';
-import { CreateCategoryDto, UpdateCategoryDto } from './../dtos/categories.dtos';
+import {
+  CreateCategoryDto,
+  UpdateCategoryDto,
+} from './../dtos/categories.dtos';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('categories')
 @Controller('categories')
 export class CategoriesController {
-  constructor(private categoriesService: CategoriesService){}
+  constructor(private categoriesService: CategoriesService) {}
 
   @Get()
   getCategories() {
@@ -34,7 +37,10 @@ export class CategoriesController {
   }
 
   @Put(':id')
-  update(@Param('id', ParseIntPipe) id: number, @Body() data: UpdateCategoryDto) {
+  update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() data: UpdateCategoryDto,
+  ) {
     return this.categoriesService.update(id, data);
   }
 
