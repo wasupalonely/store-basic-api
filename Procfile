@@ -1,1 +1,1 @@
-web: npm run start:prod --omit=dev
+web: npm run start:prod
